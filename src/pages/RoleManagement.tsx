@@ -225,11 +225,11 @@ export default function RoleManagement() {
                   </SelectContent>
                 </Select>
               </div>
-              <Card className="border-amber-200 bg-amber-50">
+              <Card className="border-[hsl(var(--warning))]/30 bg-[hsl(var(--warning))]/5">
                 <CardContent className="py-3 px-4">
                   <div className="flex items-start gap-2">
-                    <Info className="h-4 w-4 text-amber-600 mt-0.5" />
-                    <p className="text-sm text-amber-700">数据权限将根据用户所在组织结构自动生效，请谨慎配置"全部数据"范围。</p>
+                    <Info className="h-4 w-4 text-[hsl(var(--warning))] mt-0.5" />
+                    <p className="text-sm text-muted-foreground">数据权限将根据用户所在组织结构自动生效，请谨慎配置"全部数据"范围。</p>
                   </div>
                 </CardContent>
               </Card>

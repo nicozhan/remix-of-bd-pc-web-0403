@@ -21,6 +21,7 @@ import MonitoringDashboard from "./pages/MonitoringDashboard";
 import ReportsDashboard from "./pages/ReportsDashboard";
 import CourseConfig from "./pages/CourseConfig";
 import TrainingLearning from "./pages/TrainingLearning";
+import AnnouncementManagement from "./pages/AnnouncementManagement";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();

@@ -22,6 +22,9 @@ import ReportsDashboard from "./pages/ReportsDashboard";
 import CourseConfig from "./pages/CourseConfig";
 import TrainingLearning from "./pages/TrainingLearning";
 import AnnouncementManagement from "./pages/AnnouncementManagement";
+import OrganizationManagement from "./pages/OrganizationManagement";
+import RoleManagement from "./pages/RoleManagement";
+import DictionaryManagement from "./pages/DictionaryManagement";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();

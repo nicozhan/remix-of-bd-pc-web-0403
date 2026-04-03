@@ -13,6 +13,9 @@ import {
   TrendingUp,
   Activity,
   FileBarChart,
+  GraduationCap,
+  BookOpen,
+  Notebook,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
@@ -62,6 +65,15 @@ const menuGroups: MenuGroup[] = [
       { title: "运营看板", url: "/analytics/operations", icon: BarChart3 },
       { title: "监控看板", url: "/analytics/monitoring", icon: Activity },
       { title: "报表查询", url: "/analytics/reports", icon: FileBarChart },
+    ],
+  },
+  {
+    title: "人员培训",
+    icon: GraduationCap,
+    prefix: "/training",
+    children: [
+      { title: "课程配置", url: "/training/courses", icon: BookOpen },
+      { title: "培训学习", url: "/training/learning", icon: Notebook },
     ],
   },
 ];

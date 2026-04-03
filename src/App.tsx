@@ -16,6 +16,9 @@ import VisitDailyReport from "./pages/VisitDailyReport";
 import PerformanceGoals from "./pages/PerformanceGoals";
 import KpiResults from "./pages/KpiResults";
 import AuditManagement from "./pages/AuditManagement";
+import OperationsDashboard from "./pages/OperationsDashboard";
+import MonitoringDashboard from "./pages/MonitoringDashboard";
+import ReportsDashboard from "./pages/ReportsDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,6 +43,9 @@ const App = () => (
             <Route path="/assessment/goals" element={<PerformanceGoals />} />
             <Route path="/assessment/results" element={<KpiResults />} />
             <Route path="/assessment/audit" element={<AuditManagement />} />
+            <Route path="/analytics/operations" element={<OperationsDashboard />} />
+            <Route path="/analytics/monitoring" element={<MonitoringDashboard />} />
+            <Route path="/analytics/reports" element={<ReportsDashboard />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -16,6 +16,7 @@ import {
   GraduationCap,
   BookOpen,
   Notebook,
+  Megaphone,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
@@ -37,6 +38,7 @@ const topMenuItems = [
   { title: "勘察管理", url: "/surveys", icon: Search },
   { title: "签约管理", url: "/contracts", icon: FileSignature },
   { title: "拜访与日报管理", url: "/visits", icon: Footprints },
+  { title: "公告管理", url: "/announcements", icon: Megaphone },
 ];
 
 interface MenuGroup {

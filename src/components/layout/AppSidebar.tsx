@@ -17,6 +17,10 @@ import {
   BookOpen,
   Notebook,
   Megaphone,
+  Settings,
+  Building2,
+  UserCog,
+  BookMarked,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
@@ -76,6 +80,16 @@ const menuGroups: MenuGroup[] = [
     children: [
       { title: "课程配置", url: "/training/courses", icon: BookOpen },
       { title: "培训学习", url: "/training/learning", icon: Notebook },
+    ],
+  },
+  {
+    title: "系统管理",
+    icon: Settings,
+    prefix: "/system",
+    children: [
+      { title: "组织机构与用户管理", url: "/system/organization", icon: Building2 },
+      { title: "角色管理", url: "/system/roles", icon: UserCog },
+      { title: "字典管理", url: "/system/dictionary", icon: BookMarked },
     ],
   },
 ];

@@ -22,6 +22,9 @@ import ReportsDashboard from "./pages/ReportsDashboard";
 import CourseConfig from "./pages/CourseConfig";
 import TrainingLearning from "./pages/TrainingLearning";
 import AnnouncementManagement from "./pages/AnnouncementManagement";
+import OrganizationManagement from "./pages/OrganizationManagement";
+import RoleManagement from "./pages/RoleManagement";
+import DictionaryManagement from "./pages/DictionaryManagement";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -52,6 +55,9 @@ const App = () => (
             <Route path="/training/courses" element={<CourseConfig />} />
             <Route path="/training/learning" element={<TrainingLearning />} />
             <Route path="/announcements" element={<AnnouncementManagement />} />
+            <Route path="/system/organization" element={<OrganizationManagement />} />
+            <Route path="/system/roles" element={<RoleManagement />} />
+            <Route path="/system/dictionary" element={<DictionaryManagement />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

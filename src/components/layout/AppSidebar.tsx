@@ -82,6 +82,16 @@ const menuGroups: MenuGroup[] = [
       { title: "培训学习", url: "/training/learning", icon: Notebook },
     ],
   },
+  {
+    title: "系统管理",
+    icon: Settings,
+    prefix: "/system",
+    children: [
+      { title: "组织机构与用户管理", url: "/system/organization", icon: Building2 },
+      { title: "角色管理", url: "/system/roles", icon: UserCog },
+      { title: "字典管理", url: "/system/dictionary", icon: BookMarked },
+    ],
+  },
 ];
 
 export function AppSidebar() {

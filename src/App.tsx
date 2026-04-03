@@ -55,6 +55,9 @@ const App = () => (
             <Route path="/training/courses" element={<CourseConfig />} />
             <Route path="/training/learning" element={<TrainingLearning />} />
             <Route path="/announcements" element={<AnnouncementManagement />} />
+            <Route path="/system/organization" element={<OrganizationManagement />} />
+            <Route path="/system/roles" element={<RoleManagement />} />
+            <Route path="/system/dictionary" element={<DictionaryManagement />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

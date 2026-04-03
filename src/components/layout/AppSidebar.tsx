@@ -13,6 +13,9 @@ import {
   TrendingUp,
   Activity,
   FileBarChart,
+  GraduationCap,
+  BookOpen,
+  Notebook,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";

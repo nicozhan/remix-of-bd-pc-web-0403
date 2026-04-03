@@ -13,6 +13,9 @@ import SurveyDetail from "./pages/SurveyDetail";
 import ContractManagement from "./pages/ContractManagement";
 import ContractDetail from "./pages/ContractDetail";
 import VisitDailyReport from "./pages/VisitDailyReport";
+import PerformanceGoals from "./pages/PerformanceGoals";
+import KpiResults from "./pages/KpiResults";
+import AuditManagement from "./pages/AuditManagement";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +37,9 @@ const App = () => (
             <Route path="/contracts" element={<ContractManagement />} />
             <Route path="/contracts/:id" element={<ContractDetail />} />
             <Route path="/visits" element={<VisitDailyReport />} />
+            <Route path="/assessment/goals" element={<PerformanceGoals />} />
+            <Route path="/assessment/results" element={<KpiResults />} />
+            <Route path="/assessment/audit" element={<AuditManagement />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

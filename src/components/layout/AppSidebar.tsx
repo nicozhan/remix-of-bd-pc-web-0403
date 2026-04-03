@@ -10,6 +10,9 @@ import {
   BarChart3,
   ShieldCheck,
   ChevronDown,
+  TrendingUp,
+  Activity,
+  FileBarChart,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
@@ -33,10 +36,34 @@ const topMenuItems = [
   { title: "拜访与日报管理", url: "/visits", icon: Footprints },
 ];
 
-const assessmentChildren = [
-  { title: "绩效目标管理", url: "/assessment/goals", icon: Target },
-  { title: "指标结果查询", url: "/assessment/results", icon: BarChart3 },
-  { title: "抽检管理", url: "/assessment/audit", icon: ShieldCheck },
+interface MenuGroup {
+  title: string;
+  icon: typeof LayoutDashboard;
+  prefix: string;
+  children: { title: string; url: string; icon: typeof LayoutDashboard }[];
+}
+
+const menuGroups: MenuGroup[] = [
+  {
+    title: "考核管理",
+    icon: ClipboardCheck,
+    prefix: "/assessment",
+    children: [
+      { title: "绩效目标管理", url: "/assessment/goals", icon: Target },
+      { title: "指标结果查询", url: "/assessment/results", icon: BarChart3 },
+      { title: "抽检管理", url: "/assessment/audit", icon: ShieldCheck },
+    ],
+  },
+  {
+    title: "数据分析",
+    icon: TrendingUp,
+    prefix: "/analytics",
+    children: [
+      { title: "运营看板", url: "/analytics/operations", icon: BarChart3 },
+      { title: "监控看板", url: "/analytics/monitoring", icon: Activity },
+      { title: "报表查询", url: "/analytics/reports", icon: FileBarChart },
+    ],
+  },
 ];
 
 export function AppSidebar() {
@@ -44,11 +71,13 @@ export function AppSidebar() {
   const collapsed = state === "collapsed";
   const location = useLocation();
 
-  const isAssessmentActive = assessmentChildren.some((c) =>
-    location.pathname.startsWith(c.url)
-  );
+  const initOpen: Record<string, boolean> = {};
+  menuGroups.forEach((g) => {
+    initOpen[g.prefix] = g.children.some((c) => location.pathname.startsWith(c.url));
+  });
+  const [openGroups, setOpenGroups] = useState(initOpen);
 
-  const [assessmentOpen, setAssessmentOpen] = useState(isAssessmentActive);
+  const toggle = (prefix: string) => setOpenGroups((o) => ({ ...o, [prefix]: !o[prefix] }));
 
   const isActive = (url: string) => {
     if (url === "/") return location.pathname === "/";
@@ -66,9 +95,7 @@ export function AppSidebar() {
           <LayoutDashboard className="h-4 w-4 text-primary-foreground" />
         </div>
         {!collapsed && (
-          <span className="text-sm font-semibold text-foreground truncate">
-            点位拓展管理
-          </span>
+          <span className="text-sm font-semibold text-foreground truncate">点位拓展管理</span>
         )}
       </div>
       <SidebarContent>
@@ -77,17 +104,8 @@ export function AppSidebar() {
             <SidebarMenu>
               {topMenuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={isActive(item.url)}
-                    tooltip={collapsed ? item.title : undefined}
-                  >
-                    <NavLink
-                      to={item.url}
-                      end={item.url === "/"}
-                      className={linkClass}
-                      activeClassName={activeClass}
-                    >
+                  <SidebarMenuButton asChild isActive={isActive(item.url)} tooltip={collapsed ? item.title : undefined}>
+                    <NavLink to={item.url} end={item.url === "/"} className={linkClass} activeClassName={activeClass}>
                       <item.icon className="h-4 w-4 shrink-0" />
                       {!collapsed && <span>{item.title}</span>}
                     </NavLink>
@@ -95,53 +113,41 @@ export function AppSidebar() {
                 </SidebarMenuItem>
               ))}
 
-              {/* 考核管理 - collapsible group */}
-              <SidebarMenuItem>
-                <SidebarMenuButton
-                  tooltip={collapsed ? "考核管理" : undefined}
-                  isActive={isAssessmentActive}
-                  onClick={() => setAssessmentOpen((o) => !o)}
-                  className={cn(
-                    linkClass,
-                    "cursor-pointer justify-between",
-                    isAssessmentActive && activeClass
-                  )}
-                >
-                  <div className="flex items-center gap-2">
-                    <ClipboardCheck className="h-4 w-4 shrink-0" />
-                    {!collapsed && <span>考核管理</span>}
-                  </div>
-                  {!collapsed && (
-                    <ChevronDown
-                      className={cn(
-                        "h-3.5 w-3.5 text-muted-foreground transition-transform",
-                        assessmentOpen && "rotate-180"
-                      )}
-                    />
-                  )}
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-
-              {/* Sub items */}
-              {(assessmentOpen || collapsed) &&
-                assessmentChildren.map((child) => (
-                  <SidebarMenuItem key={child.title}>
-                    <SidebarMenuButton
-                      asChild
-                      isActive={isActive(child.url)}
-                      tooltip={collapsed ? child.title : undefined}
-                    >
-                      <NavLink
-                        to={child.url}
-                        className={cn(linkClass, !collapsed && "pl-9")}
-                        activeClassName={activeClass}
+              {menuGroups.map((group) => {
+                const groupActive = group.children.some((c) => location.pathname.startsWith(c.url));
+                const isOpen = openGroups[group.prefix];
+                return (
+                  <div key={group.prefix}>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton
+                        tooltip={collapsed ? group.title : undefined}
+                        isActive={groupActive}
+                        onClick={() => toggle(group.prefix)}
+                        className={cn(linkClass, "cursor-pointer justify-between", groupActive && activeClass)}
                       >
-                        <child.icon className="h-4 w-4 shrink-0" />
-                        {!collapsed && <span>{child.title}</span>}
-                      </NavLink>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
+                        <div className="flex items-center gap-2">
+                          <group.icon className="h-4 w-4 shrink-0" />
+                          {!collapsed && <span>{group.title}</span>}
+                        </div>
+                        {!collapsed && (
+                          <ChevronDown className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", isOpen && "rotate-180")} />
+                        )}
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    {(isOpen || collapsed) &&
+                      group.children.map((child) => (
+                        <SidebarMenuItem key={child.url}>
+                          <SidebarMenuButton asChild isActive={isActive(child.url)} tooltip={collapsed ? child.title : undefined}>
+                            <NavLink to={child.url} className={cn(linkClass, !collapsed && "pl-9")} activeClassName={activeClass}>
+                              <child.icon className="h-4 w-4 shrink-0" />
+                              {!collapsed && <span>{child.title}</span>}
+                            </NavLink>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                      ))}
+                  </div>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

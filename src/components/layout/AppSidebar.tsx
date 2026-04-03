@@ -67,6 +67,15 @@ const menuGroups: MenuGroup[] = [
       { title: "报表查询", url: "/analytics/reports", icon: FileBarChart },
     ],
   },
+  {
+    title: "人员培训",
+    icon: GraduationCap,
+    prefix: "/training",
+    children: [
+      { title: "课程配置", url: "/training/courses", icon: BookOpen },
+      { title: "培训学习", url: "/training/learning", icon: Notebook },
+    ],
+  },
 ];
 
 export function AppSidebar() {

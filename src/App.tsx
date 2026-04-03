@@ -19,6 +19,8 @@ import AuditManagement from "./pages/AuditManagement";
 import OperationsDashboard from "./pages/OperationsDashboard";
 import MonitoringDashboard from "./pages/MonitoringDashboard";
 import ReportsDashboard from "./pages/ReportsDashboard";
+import CourseConfig from "./pages/CourseConfig";
+import TrainingLearning from "./pages/TrainingLearning";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,6 +48,8 @@ const App = () => (
             <Route path="/analytics/operations" element={<OperationsDashboard />} />
             <Route path="/analytics/monitoring" element={<MonitoringDashboard />} />
             <Route path="/analytics/reports" element={<ReportsDashboard />} />
+            <Route path="/training/courses" element={<CourseConfig />} />
+            <Route path="/training/learning" element={<TrainingLearning />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

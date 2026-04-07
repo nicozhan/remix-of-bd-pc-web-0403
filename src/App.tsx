@@ -9,6 +9,7 @@ import CustomerOpportunity from "./pages/CustomerOpportunity";
 import CustomerDetail from "./pages/CustomerDetail";
 import CustomerCreate from "./pages/CustomerCreate";
 import OpportunityDetail from "./pages/OpportunityDetail";
+import OpportunityCreate from "./pages/OpportunityCreate";
 import SurveyManagement from "./pages/SurveyManagement";
 import SurveyDetail from "./pages/SurveyDetail";
 import ContractManagement from "./pages/ContractManagement";
@@ -42,6 +43,7 @@ const App = () => (
             <Route path="/customers" element={<CustomerOpportunity />} />
             <Route path="/customers/new" element={<CustomerCreate />} />
             <Route path="/customers/:id" element={<CustomerDetail />} />
+            <Route path="/opportunities/new" element={<OpportunityCreate />} />
             <Route path="/opportunities/:id" element={<OpportunityDetail />} />
             <Route path="/surveys" element={<SurveyManagement />} />
             <Route path="/surveys/:id" element={<SurveyDetail />} />

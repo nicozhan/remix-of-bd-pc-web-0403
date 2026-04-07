@@ -40,6 +40,7 @@ const App = () => (
           <Route element={<AppLayout />}>
             <Route path="/" element={<Index />} />
             <Route path="/customers" element={<CustomerOpportunity />} />
+            <Route path="/customers/new" element={<CustomerCreate />} />
             <Route path="/customers/:id" element={<CustomerDetail />} />
             <Route path="/opportunities/:id" element={<OpportunityDetail />} />
             <Route path="/surveys" element={<SurveyManagement />} />

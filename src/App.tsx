@@ -7,6 +7,7 @@ import AppLayout from "@/components/layout/AppLayout";
 import Index from "./pages/Index";
 import CustomerOpportunity from "./pages/CustomerOpportunity";
 import CustomerDetail from "./pages/CustomerDetail";
+import CustomerCreate from "./pages/CustomerCreate";
 import OpportunityDetail from "./pages/OpportunityDetail";
 import SurveyManagement from "./pages/SurveyManagement";
 import SurveyDetail from "./pages/SurveyDetail";
@@ -39,6 +40,7 @@ const App = () => (
           <Route element={<AppLayout />}>
             <Route path="/" element={<Index />} />
             <Route path="/customers" element={<CustomerOpportunity />} />
+            <Route path="/customers/new" element={<CustomerCreate />} />
             <Route path="/customers/:id" element={<CustomerDetail />} />
             <Route path="/opportunities/:id" element={<OpportunityDetail />} />
             <Route path="/surveys" element={<SurveyManagement />} />

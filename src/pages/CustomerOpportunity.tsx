@@ -10,11 +10,11 @@ import StatusBadge from "@/components/shared/StatusBadge";
 import PageHeader from "@/components/shared/PageHeader";
 
 const customers = [
-  { id: "C001", name: "星巴克（中国）", contact: "张经理", phone: "138****1234", bd: "李明", type: "连锁品牌", opportunities: 3, contracts: 1, points: 12, revenue: "45,000", updated: "2026-04-02" },
-  { id: "C002", name: "瑞幸咖啡", contact: "王总", phone: "139****5678", bd: "赵静", type: "连锁品牌", opportunities: 5, contracts: 2, points: 28, revenue: "120,000", updated: "2026-04-01" },
-  { id: "C003", name: "全家便利店", contact: "陈店长", phone: "137****9012", bd: "李明", type: "便利店", opportunities: 2, contracts: 1, points: 8, revenue: "18,000", updated: "2026-03-30" },
-  { id: "C004", name: "海底捞火锅", contact: "刘经理", phone: "136****3456", bd: "周伟", type: "餐饮", opportunities: 1, contracts: 0, points: 0, revenue: "0", updated: "2026-03-28" },
-  { id: "C005", name: "万达广场", contact: "孙总", phone: "135****7890", bd: "赵静", type: "商业综合体", opportunities: 8, contracts: 3, points: 45, revenue: "280,000", updated: "2026-04-03" },
+  { id: "C001", name: "星巴克（中国）", code: "KH-20251201-001", location: "北京市朝阳区建国路88号", contact: "张经理", phone: "138****1234", bd: "李明", level: "A级", opportunities: 3, points: 12, activeDevices: 8, pendingActivation: 2, pendingInstall: 2, revenue: "45,000", updated: "2026-04-02" },
+  { id: "C002", name: "瑞幸咖啡", code: "KH-20251115-002", location: "北京市海淀区中关村大街1号", contact: "王总", phone: "139****5678", bd: "赵静", level: "S级", opportunities: 5, points: 28, activeDevices: 22, pendingActivation: 3, pendingInstall: 3, revenue: "120,000", updated: "2026-04-01" },
+  { id: "C003", name: "全家便利店", code: "KH-20260101-003", location: "上海市浦东新区陆家嘴环路100号", contact: "陈店长", phone: "137****9012", bd: "李明", level: "B级", opportunities: 2, points: 8, activeDevices: 6, pendingActivation: 1, pendingInstall: 1, revenue: "18,000", updated: "2026-03-30" },
+  { id: "C004", name: "海底捞火锅", code: "KH-20260210-004", location: "北京市朝阳区大悦城", contact: "刘经理", phone: "136****3456", bd: "周伟", level: "B级", opportunities: 1, points: 0, activeDevices: 0, pendingActivation: 0, pendingInstall: 0, revenue: "0", updated: "2026-03-28" },
+  { id: "C005", name: "万达广场", code: "KH-20251020-005", location: "杭州市西湖区文三路500号", contact: "孙总", phone: "135****7890", bd: "赵静", level: "S级", opportunities: 8, points: 45, activeDevices: 38, pendingActivation: 4, pendingInstall: 3, revenue: "280,000", updated: "2026-04-03" },
 ];
 
 const opportunities = [
@@ -47,6 +47,16 @@ const CustomerOpportunity = () => {
               <Input placeholder="搜索名称 / 联系人 / 电话" className="pl-9" value={search} onChange={(e) => setSearch(e.target.value)} />
             </div>
             <Select>
+              <SelectTrigger className="w-[120px]"><SelectValue placeholder="客户等级" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">全部</SelectItem>
+                <SelectItem value="s">S级</SelectItem>
+                <SelectItem value="a">A级</SelectItem>
+                <SelectItem value="b">B级</SelectItem>
+                <SelectItem value="c">C级</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select>
               <SelectTrigger className="w-[120px]"><SelectValue placeholder="城市" /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">全部</SelectItem>
@@ -66,7 +76,7 @@ const CustomerOpportunity = () => {
             </Select>
             <div className="flex-1" />
             <Button variant="outline" size="sm"><Download className="h-4 w-4 mr-1" />导出</Button>
-            <Button size="sm"><Plus className="h-4 w-4 mr-1" />新建客户</Button>
+            <Button size="sm" onClick={() => navigate("/customers/new")}><Plus className="h-4 w-4 mr-1" />新建客户</Button>
           </div>
 
           <div className="rounded-lg border border-border bg-card">
@@ -74,14 +84,16 @@ const CustomerOpportunity = () => {
               <TableHeader>
                 <TableRow>
                   <TableHead>客户名称</TableHead>
+                  <TableHead>客户编码</TableHead>
+                  <TableHead>客户位置</TableHead>
                   <TableHead>联系人</TableHead>
-                  <TableHead>电话</TableHead>
-                  <TableHead>所属BD</TableHead>
-                  <TableHead>客户类型</TableHead>
+                  <TableHead>客户等级</TableHead>
                   <TableHead className="text-right">商机数</TableHead>
-                  <TableHead className="text-right">合同数</TableHead>
                   <TableHead className="text-right">点位数</TableHead>
-                  <TableHead className="text-right">营业额</TableHead>
+                  <TableHead className="text-right">已激活</TableHead>
+                  <TableHead className="text-right">待激活</TableHead>
+                  <TableHead className="text-right">待安装</TableHead>
+                  <TableHead className="text-right">汇总营业额</TableHead>
                   <TableHead>更新时间</TableHead>
                 </TableRow>
               </TableHeader>
@@ -89,14 +101,18 @@ const CustomerOpportunity = () => {
                 {customers.map((c) => (
                   <TableRow key={c.id} className="cursor-pointer hover:bg-accent/50" onClick={() => navigate(`/customers/${c.id}`)}>
                     <TableCell className="font-medium text-primary">{c.name}</TableCell>
+                    <TableCell className="text-muted-foreground text-xs font-mono">{c.code}</TableCell>
+                    <TableCell className="max-w-[160px] truncate text-xs text-muted-foreground">{c.location}</TableCell>
                     <TableCell>{c.contact}</TableCell>
-                    <TableCell>{c.phone}</TableCell>
-                    <TableCell>{c.bd}</TableCell>
-                    <TableCell><StatusBadge status={c.type} type="default" /></TableCell>
+                    <TableCell>
+                      <StatusBadge status={c.level} type={c.level === "S级" ? "danger" : c.level === "A级" ? "warning" : "default"} />
+                    </TableCell>
                     <TableCell className="text-right">{c.opportunities}</TableCell>
-                    <TableCell className="text-right">{c.contracts}</TableCell>
                     <TableCell className="text-right">{c.points}</TableCell>
-                    <TableCell className="text-right">¥{c.revenue}</TableCell>
+                    <TableCell className="text-right font-medium">{c.activeDevices}</TableCell>
+                    <TableCell className="text-right">{c.pendingActivation}</TableCell>
+                    <TableCell className="text-right">{c.pendingInstall}</TableCell>
+                    <TableCell className="text-right font-semibold text-primary">¥{c.revenue}</TableCell>
                     <TableCell className="text-muted-foreground">{c.updated}</TableCell>
                   </TableRow>
                 ))}

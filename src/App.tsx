@@ -7,6 +7,7 @@ import AppLayout from "@/components/layout/AppLayout";
 import Index from "./pages/Index";
 import CustomerOpportunity from "./pages/CustomerOpportunity";
 import CustomerDetail from "./pages/CustomerDetail";
+import CustomerCreate from "./pages/CustomerCreate";
 import OpportunityDetail from "./pages/OpportunityDetail";
 import SurveyManagement from "./pages/SurveyManagement";
 import SurveyDetail from "./pages/SurveyDetail";

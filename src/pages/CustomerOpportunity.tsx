@@ -66,7 +66,7 @@ const CustomerOpportunity = () => {
             </Select>
             <div className="flex-1" />
             <Button variant="outline" size="sm"><Download className="h-4 w-4 mr-1" />导出</Button>
-            <Button size="sm" onClick={() => navigate("/customers/new")}><Plus className="h-4 w-4 mr-1" />新建客户</Button>
+            <Button size="sm"><Plus className="h-4 w-4 mr-1" />新建客户</Button>
           </div>
 
           <div className="rounded-lg border border-border bg-card">

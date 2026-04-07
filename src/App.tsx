@@ -25,6 +25,7 @@ import AnnouncementManagement from "./pages/AnnouncementManagement";
 import OrganizationManagement from "./pages/OrganizationManagement";
 import RoleManagement from "./pages/RoleManagement";
 import DictionaryManagement from "./pages/DictionaryManagement";
+import CustomerCreate from "./pages/CustomerCreate";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -39,6 +40,7 @@ const App = () => (
           <Route element={<AppLayout />}>
             <Route path="/" element={<Index />} />
             <Route path="/customers" element={<CustomerOpportunity />} />
+            <Route path="/customers/new" element={<CustomerCreate />} />
             <Route path="/customers/:id" element={<CustomerDetail />} />
             <Route path="/opportunities/:id" element={<OpportunityDetail />} />
             <Route path="/surveys" element={<SurveyManagement />} />
